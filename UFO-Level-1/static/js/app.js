@@ -5,7 +5,7 @@ let tableData = data,
     form = d3.select("form"),
     tbody = d3.select("tbody");
 
-// Console logging data from data.js to 
+// Console logging data from data.js
 console.log(data);
 
 // Appending one table row for each sighting object and appending row data
@@ -18,15 +18,27 @@ data.forEach((sighting) => {
 })
 
 
-// // Completing the event handler function for the datetime form
-// const runEnter = () => {
+// Completing the event handler function for the datetime form
+const runEnter = () => {
 
-//     // Preventing the default function from occuring
-//     d3.event.preventDefault();
+    // Preventing the default function from occuring
+    d3.event.preventDefault();
 
-//     // Selecting input element and getting the raw HTML node
-//     let inputElement = d3.select("#datetime");
+    // Selecting input element and getting the raw HTML node
+    let inputElement = d3.select("#datetime");
 
-//     // Then collecting the input value from the HTML node
-//     let inputValue = inputElement.property("value");
-// }
+    // Then collecting the input value from the HTML node
+    let inputValue = inputElement.property("value");
+
+    // Using form data to filter by date/time
+    console.log(tableData)
+    console.log(inputValue)
+
+    let filteredData = tableData.filter(sighting => sighting.datetime === inputValue);
+
+    console.log(filteredData);
+}
+
+// Event handlers
+button.on("click", runEnter);
+form.on("submit",runEnter);
