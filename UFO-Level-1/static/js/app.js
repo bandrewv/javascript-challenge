@@ -9,7 +9,7 @@ let tableData = data,
 console.log(data);
 
 // Appending one table row for each sighting object and appending row data
-data.forEach((sighting) => {
+tableData.forEach((sighting) => {
     let row = tbody.append("tr");
     Object.values(sighting).forEach(value => {
         let cell = row.append("td");
@@ -24,6 +24,9 @@ const runEnter = () => {
     // Preventing the default function from occuring
     d3.event.preventDefault();
 
+    // Clearing out previous table data
+    tbody.html("");
+
     // Selecting input element and getting the raw HTML node
     let inputElement = d3.select("#datetime");
 
@@ -34,9 +37,19 @@ const runEnter = () => {
     console.log(tableData)
     console.log(inputValue)
 
+    // Storing new data set based on filter criteria into new variable
     let filteredData = tableData.filter(sighting => sighting.datetime === inputValue);
 
     console.log(filteredData);
+
+    // Looping through filtered data and creating new table
+    filteredData.forEach((sighting) => {
+        let row = tbody.append("tr");
+        Object.values(sighting).forEach(value => {
+            let cell = row.append("td");
+            cell.text(value);
+        })
+    })
 }
 
 // Event handlers
